@@ -40,11 +40,11 @@ juce_add_plugin(RiserLab
     COPY_PLUGIN_AFTER_BUILD TRUE)
 
 target_sources(RiserLab PRIVATE
-    Source/PluginProcessor.cpp
-    Source/PluginProcessor.h
-    Source/PluginEditor.cpp
-    Source/PluginEditor.h
-    Source/RiserEngine.h)
+    PluginProcessor.cpp
+    PluginProcessor.h
+    PluginEditor.cpp
+    PluginEditor.h
+    RiserEngine.h)
 
 target_compile_definitions(RiserLab PUBLIC
     JUCE_WEB_BROWSER=0
