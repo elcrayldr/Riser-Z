@@ -17,6 +17,15 @@ private:
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     using ButtonAttachment = juce::AudioProcessorValueTreeState::ButtonAttachment;
 
+    struct CaptureButton : public juce::Button
+    {
+        CaptureButton() : juce::Button ("Capture") {}
+        void paintButton (juce::Graphics&, bool shouldDrawButtonAsHighlighted,
+                          bool shouldDrawButtonAsDown) override;
+        void setActive (bool shouldBeActive) { active = shouldBeActive; repaint(); }
+        bool active = false;
+    };
+
     // Zona que muestra la onda del riser y permite arrastrarlo al DAW.
     struct DragArea : public juce::Component
     {
@@ -41,7 +50,8 @@ private:
 
     RiserLabProcessor& proc;
 
-    juce::TextButton captureButton, generateButton;
+    CaptureButton captureButton;
+    juce::TextButton generateButton;
     juce::Label statusLabel;
     juce::ComboBox presetBox;
     std::array<Knob, 8> knobs;
@@ -50,6 +60,7 @@ private:
     DragArea dragArea;
 
     juce::Rectangle<int> titleArea;
+    juce::Rectangle<int> subtitleArea;
     juce::String lastMessage;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (RiserLabEditor)
